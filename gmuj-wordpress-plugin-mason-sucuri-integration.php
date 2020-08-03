@@ -190,7 +190,7 @@ function gmuj_msi_callback_section_settings_caching() {
 	echo '<p>';
 	// Output cache clear button, if cache clear url is not empty
 	if (!empty($gmuj_mmi_options['cache_clear_url'])) {
-		echo '<a class="button button-primary" href="'.$gmuj_mmi_options['cache_clear_url'].'">Clear Cache Now</a>'.PHP_EOL;
+		echo '<a class="button button-primary" href="'.$gmuj_mmi_options['cache_clear_url'].'" target="_blank">Clear Cache Now</a>'.PHP_EOL;
 	}
 	echo '</p>';
 
