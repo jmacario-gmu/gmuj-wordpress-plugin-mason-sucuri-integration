@@ -184,15 +184,21 @@ function gmuj_msi_callback_section_settings_caching() {
 	$gmuj_mmi_options = get_option('gmuj_msi_options');
 
 	// Provide section introductory information
-	echo '<p>This section contains settings related to caching in Sucuri web application firewall. You can clear the cache now bu using the button below:</p>';
+	echo '<p>This section contains settings related to caching in Sucuri web application firewall.</p>';
 
 	// Provide cache clearing link
-	echo '<p>';
-	// Output cache clear button, if cache clear url is not empty
-	if (!empty($gmuj_mmi_options['cache_clear_url'])) {
-		echo '<a class="button button-primary" href="'.$gmuj_mmi_options['cache_clear_url'].'" target="_blank">Clear Cache Now</a>'.PHP_EOL;
-	}
-	echo '</p>';
+
+		// Introduce cache clearing link
+		if (empty($gmuj_mmi_options['cache_clear_url'])) {
+			echo '<p>Please provide a Sucuri cache-clearing URL below.</p>';
+		} else {
+			echo '<p>You can clear the Sucuri cache now by using the button below:</p>';
+		}
+
+		// Output cache clear button, if cache clear url is not empty
+		if (!empty($gmuj_mmi_options['cache_clear_url'])) {
+			echo '<p><a class="button button-primary" href="'.$gmuj_mmi_options['cache_clear_url'].'" target="_blank">Clear Cache Now</a></p>'.PHP_EOL;
+		}
 
 }
 
