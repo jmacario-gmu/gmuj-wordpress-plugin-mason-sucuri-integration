@@ -241,11 +241,25 @@ function gmuj_msi_options_default() {
 function gmuj_msi_callback_validate_options($input) {
 	
 	// Cache clear URL
-	if (isset($input['cache_clear_url'])) {
-		//$input['cache_clear_url'] = sanitize_text_field($input['cache_clear_url']);
-		$input['cache_clear_url'] = filter_var($input['cache_clear_url'], FILTER_SANITIZE_URL);
+
+	// Does the cache clear URL field value violate our criteria (which is that it must be a link to waf.sucuri.net)? For user convenience, we make the protocol optional.
+	if (!preg_match('/^(https:\/\/)?waf.sucuri.net\//i',$input['cache_clear_url'])) {
+		// If this value does violate our criteria, clear the variable, and therefore save nothing
+		$input['cache_clear_url'] = '';
 	}
 
+	// If the provided field value is valid (hasn't been cleared above)...
+	if (!empty($input['cache_clear_url'])) {
+		// If the provided field value doesn't start with "https://", add it
+		if (!preg_match('/^https:\/\//i',$input['cache_clear_url'])) {
+			$input['cache_clear_url'] = 'https://' . $input['cache_clear_url'];
+		}
+	}
+
+	// Filter the resulting value as a clean URL
+	$input['cache_clear_url'] = filter_var($input['cache_clear_url'], FILTER_SANITIZE_URL);
+
+	// Return value
 	return $input;
 	
 }
