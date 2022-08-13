@@ -6,62 +6,57 @@
 
 
 /**
- * Adds link to plugin settings page to Wordpress admin menu as a top-level item
+ * Adds Mason admin menu item to Wordpress admin menu as a top-level item
  */
-add_action('admin_menu', 'gmuj_msi_add_toplevel_menu');
-function gmuj_msi_add_toplevel_menu() {
+add_action('admin_menu', 'gmuj_add_admin_menu_mason');
 
-	// Add Wordpress admin menu item for this plugin's settings
-	/*
-	Code example:
-	add_menu_page(
-		string   $page_title, // title of page
-		string   $menu_title, // title of menu item
-		string   $capability, // capability needed for user to access this menu item
-		string   $menu_slug, // unique string used to identify the plugins settings page - use plugin name
-		callable $function = '', // function that displays the plugin page
-		string   $icon_url = '', // menu icon
-		int      $position = null // position in menu sidebar - the lower the number the higher it will appear
-	)
-	*/
-	add_menu_page(
-		'Mason Sucuri Integration',
-		'Mason Sucuri Integration',
-		'manage_options',
-		'gmuj_msi',
-		'gmuj_msi_display_settings_page',
-		'dashicons-admin-generic',
-		1
-	);
+// Function to add Mason admin menu item. If this shared function does not exist already, define it now.
+if (!function_exists('gmuj_add_admin_menu_mason')) {
+
+	function gmuj_add_admin_menu_mason() {
+
+		// Add Wordpress admin menu item for mason stuff
+
+		// If the Mason top-level admin menu item does not exist already, add it.
+		if (menu_page_url('gmuw', false) == false) {
+
+			// Add top admin menu page
+			add_menu_page(
+				'Mason WordPress',
+				'Mason WordPress',
+				'manage_options',
+				'gmuw',
+				function(){
+					echo "<div class='wrap'>";
+					echo '<h1>' . esc_html(get_admin_page_title()) . '</h1>';
+					echo '<p>Please use the links at left to access Mason WordPress Platform Features.</p>';
+					echo "</div>";
+				},
+				gmuj_mason_svg_icon(),
+				1
+			);
+
+		}
+
+	}
 
 }
 
 /**
- * Adds link to plugin settings page to Wordpress admin menu as a sub-menu item under settings
+ * Adds link to plugin settings page to Wordpress admin menu as a sub-menu item under Mason
  */
 add_action('admin_menu', 'gmuj_msi_add_sublevel_menu');
 function gmuj_msi_add_sublevel_menu() {
 	
-	// Add Wordpress admin menu item under settings for this plugin's settings
-	/*
+	// Add Wordpress admin menu item under Mason for this plugin's settings
 	add_submenu_page(
-		string   $parent_slug, // under which admin page should this sub-menu item appear
-		string   $page_title, // title of admin page
-		string   $menu_title, // title of menu item
-		string   $capability, // capability needed for user to access this menu item
-		string   $menu_slug, // unique string used to identify the plugins settings page - use plugin name
-		callable $function = '', // function that displays the plugin page
-		int 	$position // the position in the menu order this item should appear
-	);
-	*/
-	add_submenu_page(
-		'options-general.php',
+		'gmuw',
 		'Mason Sucuri Integration',
 		'Mason Sucuri Integration',
 		'manage_options',
 		'gmuj_msi',
 		'gmuj_msi_display_settings_page',
-		0
+		3
 	);
 	
 }

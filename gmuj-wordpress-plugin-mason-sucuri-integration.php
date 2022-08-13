@@ -27,6 +27,8 @@
 	);
 
 // Include files
+	// Branding
+		include('php/fnsBranding.php');
 	// Admin menu
 		include('php/admin-menu.php');
 	// Admin page
