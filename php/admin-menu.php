@@ -29,7 +29,7 @@ if (!function_exists('gmuj_add_admin_menu_mason')) {
 				function(){
 					echo "<div class='wrap'>";
 					echo '<h1>' . esc_html(get_admin_page_title()) . '</h1>';
-					echo '<p>Please use the links at left to access Mason WordPress Platform Features.</p>';
+					echo '<p>Please use the links at left to access Mason WordPress platform features.</p>';
 					echo "</div>";
 				},
 				gmuj_mason_svg_icon(),
