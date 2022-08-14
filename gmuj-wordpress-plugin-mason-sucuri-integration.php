@@ -9,7 +9,7 @@
  * Author:            Jan Macario
  * Plugin URI:        https://github.com/jmacario-gmu/gmuj-wordpress-plugin-mason-sucuri-integration
  * Description:       Mason WordPress plugin which provides integration with Sucuri web application firewall.
- * Version:           1.0
+ * Version:           1.1
  */
 
 
